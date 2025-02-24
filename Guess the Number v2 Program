@@ -1,5 +1,7 @@
 import random
 
+bool end = False
+
 number = random.randint(1, 100)
 
 print(str(number))
@@ -17,8 +19,20 @@ class User():
         print("Username: " + str(self.name))
         print("Score: " + str(self.score))
 
+def whichUser():
+    
 
-nameInput = input("Enter your username: ")
+nameInput1 = input("First user, enter your username: ")
 
-user1 = User(nameInput)
+user1 = User(nameInput1, 0)
+
+nameInput2 = input("Second user, enter your username: ")
+
+user2 = User(nameInput2, 0)
+
+
+while True:
+
+    
+
 
