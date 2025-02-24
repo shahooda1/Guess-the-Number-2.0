@@ -1,2 +1,24 @@
 import random
 
+number = random.randint(1, 100)
+
+print(str(number))
+
+class User():
+
+    def __init__ (self, name, score):
+        self.name = name
+        self.score = score
+
+    def assignScore(self, score):
+        self.score = score
+
+    def displayInfo(self):
+        print("Username: " + str(self.name))
+        print("Score: " + str(self.score))
+
+
+nameInput = input("Enter your username: ")
+
+user1 = User(nameInput)
+
