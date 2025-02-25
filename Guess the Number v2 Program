@@ -1,10 +1,7 @@
 import random
 
-bool end = False
+endGame = False
 
-number = random.randint(1, 100)
-
-print(str(number))
 
 class User():
 
@@ -16,23 +13,38 @@ class User():
         self.score = score
 
     def displayInfo(self):
-        print("Username: " + str(self.name))
-        print("Score: " + str(self.score))
+        print(f"Username: (self.name)")
+        print(f"Score: (self.score)")
 
-def whichUser():
+
+
+def game():
+
+    nameInput = input("Enter your username: ")
+    user1 = User(nameInput, 0)
+    print()
+    number = random.randint(1, 100)
     
 
-nameInput1 = input("First user, enter your username: ")
+    print("The number is between 1 and 100.\n")
+    print(str(number))
+    while True:
 
-user1 = User(nameInput1, 0)
+        guess = int(input("Enter a guess: \n"))
+    
+        if number > guess:
+            print("Your guess was too low.\n")
+            
+        elif number < guess:
+            print("Your guess was too high.\n")
+        else:
+            print("You got it!\n")
+            break;
+        
 
-nameInput2 = input("Second user, enter your username: ")
+game()
 
-user2 = User(nameInput2, 0)
-
-
-while True:
-
+    
     
 
 
