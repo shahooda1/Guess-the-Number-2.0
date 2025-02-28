@@ -1,16 +1,22 @@
 
 list = ["a", 500, "b", 600, "c", 300]
 
-i = 2
+i = 0
+
+list[i:i+2] = [tuple(list[i:i+2])]
 
 
-list[0:2] = [tuple(list[0:2])]
 
-list[1:3] = [tuple(list[1:3])]
-    
-list[2:4] = [tuple(list[2:4])]
+i += 1
 
-# key=Lambda allows you to sort based on the value at index 1 of the tuple
+list[i:i+2] = [tuple(list[i:i+2])]
+
+i += 1
+
+list[i:i+2] = [tuple(list[i:i+2])]
+
+
+# key=lambda allows you to sort based on the value at index 1 of the tuple
 
 list.sort(key=lambda x: x[1], reverse=True)
 
