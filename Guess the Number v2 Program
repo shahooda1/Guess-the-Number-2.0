@@ -4,7 +4,7 @@ import random
 endGame = False
 
 # List to help rearrange the leaderboard
-lbInfo
+lbInfo = []
 
 # Setting up user class to keep the user's score and name
 class User():
@@ -87,15 +87,22 @@ def again():
 # Function for putting the leaderboard in highest to lowest order
 def order():
 
-    for i in range(len(lbScores)):
-        
+    i = 0
     
+    while True:
 
-# Function for writing leaderboard information
+        lbInfo[i:i + 2] = [tuple(lbInfo[i:i + 2])]
+
+        i += 1
+        
+        if i == len(lbInfo):
+            break;
+
+      
 def write():
 
-    f = open("leaderboard.txt", "w")
-    f.write(user1 + ": " + score)
+    print(lbInfo)
+        
 
 
 
@@ -104,7 +111,11 @@ while True:
     game()
 
 
-    again()
+    #again()
+
+    order()
+
+    write()
 
     if endGame == True:
 
