@@ -3,6 +3,9 @@ import random
 # Variable for ending the game
 endGame = False
 
+# Variable for incrementing
+i = 0
+
 # List to help rearrange the leaderboard
 lbInfo = []
 
@@ -41,6 +44,7 @@ def game():
 
     print("\nThe number is between 1 and 100.")
     print(str(number))
+
     while True:
 
         guess = int(input("\nEnter a guess: "))
@@ -50,7 +54,7 @@ def game():
 
             user1.addList()
             
-            break;
+            break
     
         if number > guess:
             print("\nYour guess was too low.")
@@ -65,7 +69,7 @@ def game():
 
             user1.addList()
             
-            break;
+            break
 
         
 
@@ -87,35 +91,49 @@ def again():
 # Function for putting the leaderboard in highest to lowest order
 def order():
 
-    i = 0
-    
-    while True:
+    global i
 
-        lbInfo[i:i + 2] = [tuple(lbInfo[i:i + 2])]
+    # Turning the list into tuples so they can be sorted with the name attached
 
-        i += 1
-        
-        if i == len(lbInfo):
-            break;
+    lbInfo[i:i + 2] = [tuple(lbInfo[i:i + 2])]
 
+    i += 1
+
+    # key=lambda allows you to sort based on the value at index 1 of the tuple
+
+    lbInfo.sort(key=lambda x: x[1], reverse=True)
+
+      
       
 def write():
 
-    print(lbInfo)
-        
+    global i
 
+    f = open("leaderboard.txt", "w")
 
+    f.write("")
+    f.write(lbInfo[0])
+    f.close()
+    
+
+def title():
+
+    print(" _________________________________________________")
+    print("|         Welcome to Guess the Number 2.0         |")
+    print("|_________________________________________________|")
 
 while True:
 
+    title()
+
+
     game()
-
-
-    #again()
 
     order()
 
     write()
+
+    #again()
 
     if endGame == True:
 
