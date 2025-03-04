@@ -161,6 +161,8 @@ def title():
     go = input("\nPress any key to continue.")
 
 
+# Now we call the functions in order. title() and loadLeaderboard() only need to be run at the beginning
+
 title()
 
 loadLeaderboard()
