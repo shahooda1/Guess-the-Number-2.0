@@ -3,11 +3,11 @@ import random
 # Variable for ending the game
 endGame = False
 
-# Variable for incrementing
-i = 0
-
 # List to help rearrange the leaderboard
 lbInfo = []
+
+# Creating a file called leaderboard.txt
+f = open("leaderboard.txt", "a")
 
 # Setting up user class to keep the user's score and name
 class User():
@@ -23,8 +23,9 @@ class User():
 
     def addList(self):
 
-        lbInfo.append(self.name)
-        lbInfo.append(self.score)
+        userInfo = (self.name, self.score)
+
+        lbInfo.append(userInfo)
         
         #print(f"Username: (self.name)")
         #print(f"Score: (self.score)")
@@ -43,12 +44,30 @@ def game():
     
 
     print("\nThe number is between 1 and 100.")
-    print(str(number))
 
     while True:
 
-        guess = int(input("\nEnter a guess: "))
+        while True:
+            guess_input = input("\nEnter a guess: ")
 
+            if guess_input.isdigit(): 
+
+                guess = int(guess_input)
+
+                if guess > 100 or guess < 1:
+
+                    print("\nEnter a number within the specified range (1-100).")
+
+                else:
+
+                    break
+
+            else:
+
+                print("\nEnter a valid number between 1 and 100.")
+            
+            
+        
         if user1.score == 0:
             print(f"You ran out of guesses. The number was {number}.")
 
@@ -76,11 +95,13 @@ def game():
 # Ask user if they want to run the program again
 def again():
 
-    leave = input("\nWould you like to run the program again? Y / N: ")
+    global endGame
+
+    leave = input("\nWould you like to run the program again? Y / N: ").strip().upper()
 
     if leave.upper() == "N":
 
-        global endGame
+        
         endGame = True
 
     else:
@@ -88,61 +109,79 @@ def again():
         print("\n Running it back.")
 
 
+# Reads any existing leaderboard and formats it into the lbInfo list
+def loadLeaderboard():
+
+    f = open("leaderboard.txt", "r")
+
+    for line in f:
+
+        oldScore = line.strip().split(": ")
+
+        if len(oldScore) == 2:
+
+            name, score = oldScore
+            lbInfo.append((name, int(score)))
+
+    f.close()
+
+    order() 
+
+
+
 # Function for putting the leaderboard in highest to lowest order
 def order():
-
-    global i
-
-    # Turning the list into tuples so they can be sorted with the name attached
-
-    lbInfo[i:i + 2] = [tuple(lbInfo[i:i + 2])]
-
-    i += 1
 
     # key=lambda allows you to sort based on the value at index 1 of the tuple
 
     lbInfo.sort(key=lambda x: x[1], reverse=True)
 
       
-      
-def write():
-
-    global i
+# Function for writing scores to leaderboard.txt
+def writeScore():
 
     f = open("leaderboard.txt", "w")
 
-    f.write("")
-    f.write(lbInfo[0])
+    for name, score in lbInfo:
+
+        f.write(f"\n{name}: {score}")
+
+
     f.close()
     
 
+# Main menu function
 def title():
 
     print(" _________________________________________________")
     print("|         Welcome to Guess the Number 2.0         |")
     print("|_________________________________________________|")
 
+
+    go = input("\nPress any key to continue.")
+
+
+title()
+
+loadLeaderboard()
+
+# Loop to keep the game going until the player stops it
 while True:
-
-    title()
-
 
     game()
 
     order()
 
-    write()
+    writeScore()
 
-    #again()
+    again()
 
     if endGame == True:
 
         print("\nGoodbye!")
-        break;
+        break
+
+
 
     
-
     
-    
-
-
