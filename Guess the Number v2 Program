@@ -35,9 +35,11 @@ class User():
 # Main gameplay
 def game():
 
+# Asking for username
     nameInput = input("\nEnter your username: ")
     user1 = User(nameInput, 0)
-    
+
+# Generating random number from 1-100
     number = random.randint(1, 100)
 
     user1.assignScore(1000)
@@ -45,8 +47,10 @@ def game():
 
     print("\nThe number is between 1 and 100.")
 
+# Loops until the user finds the correct number
     while True:
 
+# Dealing with invalid inputs
         while True:
             guess_input = input("\nEnter a guess: ")
 
@@ -67,7 +71,7 @@ def game():
                 print("\nEnter a valid number between 1 and 100.")
             
             
-        
+    # Stops the code once the user runs out of guesses
         if user1.score == 0:
             print(f"You ran out of guesses. The number was {number}.")
 
@@ -83,6 +87,7 @@ def game():
             print("\nYour guess was too high.")
             user1.score -= 100
 
+# Stops the code once the user guesses correctly
         else:
             print(f"\nYou got it! Your score was {user1.score}.")
 
@@ -174,7 +179,7 @@ def title():
 
     while True:
 
-
+    # Gets user input and continues on with whichever path they choose
         menuInput = input("\nPress 1 to continue to the game. Press 2 to view the leaderboard.")
 
         if menuInput.strip() == "1":
