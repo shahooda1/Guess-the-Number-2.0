@@ -6,8 +6,8 @@ endGame = False
 # List to help rearrange the leaderboard
 lbInfo = []
 
-# Creating a file called leaderboard.txt
-f = open("leaderboard.txt", "a")
+# Creating a file called SAleaderboard.txt
+f = open("SAleaderboard.txt", "a")
 
 # Setting up user class to keep the user's score and name
 class User():
@@ -112,7 +112,7 @@ def again():
 # Reads any existing leaderboard and formats it into the lbInfo list
 def loadLeaderboard():
 
-    f = open("leaderboard.txt", "r")
+    f = open("SAleaderboard.txt", "r")
 
     for line in f:
 
@@ -136,11 +136,26 @@ def order():
 
     lbInfo.sort(key=lambda x: x[1], reverse=True)
 
-      
-# Function for writing scores to leaderboard.txt
+# Function for looking at the leaderboard from the main menu
+def viewLeaderboard():
+
+    if len(lbInfo) == 0:
+
+        print("\nThe leaderboard is empty right now. Play a round to put your score here.")
+
+        goBack = input("\nPress any key to return to the main menu.")
+
+    else:
+
+        for name, score in lbInfo:
+            print(f"\n{name}: {score}")
+
+        goBack = input("\nPress any key to return to the main menu.")
+
+# Function for writing scores to SAleaderboard.txt
 def writeScore():
 
-    f = open("leaderboard.txt", "w")
+    f = open("SAleaderboard.txt", "w")
 
     for name, score in lbInfo:
 
@@ -157,15 +172,36 @@ def title():
     print("|         Welcome to Guess the Number 2.0         |")
     print("|_________________________________________________|")
 
+    while True:
 
-    go = input("\nPress any key to continue.")
+
+        menuInput = input("\nPress 1 to continue to the game. Press 2 to view the leaderboard.")
+
+        if menuInput.strip() == "1":
+
+            print("\nStarting the game.")
+            break
+        
+        elif menuInput.strip() == "2":
+
+            viewLeaderboard()
+            
+            continue
+        
+        else:
+
+            print("\nPlease provide a valid input.")
+            continue
 
 
-# Now we call the functions in order. title() and loadLeaderboard() only need to be run at the beginning
+
+# Now we call the functions in order.
+
+loadLeaderboard()
 
 title()
 
-loadLeaderboard()
+
 
 # Loop to keep the game going until the player stops it
 while True:
